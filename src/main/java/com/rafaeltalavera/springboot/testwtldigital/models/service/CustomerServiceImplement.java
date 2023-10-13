@@ -1,8 +1,10 @@
 package com.rafaeltalavera.springboot.testwtldigital.models.service;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +22,6 @@ public class CustomerServiceImplement implements ICustomerService{
 	public List<Customer> findALL() {
 		return (List<Customer>) customerDao.findAll();
 	}
-
 	
 	@Override
 	@Transactional
@@ -41,4 +42,21 @@ public class CustomerServiceImplement implements ICustomerService{
 		
 	}
 
+	@Override
+	@Transactional(readOnly=true) 
+	public Page<Customer> findALL(Pageable pageable) {
+		return customerDao.findAll(pageable);
+	}
+
+
+
+
+
+
+
+
+
 }
+
+
+

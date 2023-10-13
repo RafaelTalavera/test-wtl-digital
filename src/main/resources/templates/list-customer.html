@@ -10,47 +10,45 @@
 
 	<div class="container py-4">
 
-			<h4 class="text-secondary" th:text="${titulo}">
-			</h4>
-			<a th:href="@{/form-customer}" class="btn btn-success">Criar Cliente</a>
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>id</th>
-						<th>CPF</th>
-						<th>Nome completo</th>
-						<th>Endereço</th>
-						<th>Data de início</th>
-						<th>Email</th>
-						<th>telefone</th>
-						<th>Editar</th>
-						<th>Eliminar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="customer : ${customer}">
-						<td th:text="${customer.id}"></td>
-						<td th:text="${customer.cpf}"></td>
-						<td th:text="${customer.fullName}"></td>
-						<td th:text="${customer.address}"></td>
-						<td th:text="${customer.creatAt}"></td>
-						<td th:text="${customer.email}"></td>
-						<td th:text="${customer.phone}"></td>
-						<td><a class="btn btn-primary btn-xs" th:href="@{'/form-customer/' + ${customer.id}}"
-								th:text="Editar"></a></td>
-						<td><a class="btn btn-danger btn-xs" th:href="@{'/delete/' + ${customer.id}}" th:text="delete"
-								onclick="return confirm('Estás seguro que quieres eliminar?');"></a></td>
-					</tr>
-				</tbody>
-			</table>
-	
+		<h4 class="text-secondary" th:text="${titulo}">
+		</h4>
+		<a th:href="@{/form-customer}" class="btn btn-success">Criar Cliente</a>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>CPF</th>
+					<th>Nome completo</th>
+					<th>Endereço</th>
+					<th>Data de início</th>
+					<th>Email</th>
+					<th>telefone</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="customer : ${customer}">
+					<td th:text="${customer.id}"></td>
+					<td th:text="${customer.cpf}"></td>
+					<td th:text="${customer.fullName}"></td>
+					<td th:text="${customer.address}"></td>
+					<td th:text="${customer.creatAt}"></td>
+					<td th:text="${customer.email}"></td>
+					<td th:text="${customer.phone}"></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{'/form-customer/' + ${customer.id}}"
+							th:text="Editar"></a></td>
+					<td><a class="btn btn-danger btn-xs" th:href="@{'/delete/' + ${customer.id}}" th:text="delete"
+							onclick="return confirm('Estás seguro que quieres eliminar?');"></a></td>
+				</tr>
+			</tbody>
+		</table>
+		<nav th:replace="paginator-nav :: paginator"></nav>
 	</div>
-	
-	<body/>
+
+	<body />
 
 	<footer th:replace="layout/layout :: footer"></footer>
 
 
 </html>
-
-

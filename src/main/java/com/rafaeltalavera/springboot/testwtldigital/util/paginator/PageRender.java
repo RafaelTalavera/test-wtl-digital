@@ -1,11 +1,13 @@
 package com.rafaeltalavera.springboot.testwtldigital.util.paginator;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 
 public class PageRender<T> {
+
 	private String url;
 	private Page<T> page;
 
@@ -22,7 +24,7 @@ public class PageRender<T> {
 		this.page = page;
 		this.paginas = new ArrayList<PageItem>();
 
-		numElementosPorPagina = page.getSize();
+		numElementosPorPagina = 6;
 		totalPaginas = page.getTotalPages();
 		paginaActual = page.getNumber() + 1;
 
@@ -80,4 +82,5 @@ public class PageRender<T> {
 	public boolean isHasPrevious() {
 		return page.hasPrevious();
 	}
+
 }
