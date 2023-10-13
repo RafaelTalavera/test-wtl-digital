@@ -10,7 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.rafaeltalavera.springboot.testwtldigital.models.entity.Customer;
 import com.rafaeltalavera.springboot.testwtldigital.models.service.ICustomerService;
@@ -19,15 +20,16 @@ import jakarta.validation.Valid;
 
 
 @Controller
+@SessionAttributes("cliente")
 public class CustomerController {
 	
 	@Autowired
-	private ICustomerService CustomerService;
+	private ICustomerService customerService;
 
 	 @RequestMapping(value = "/list-customer", method = RequestMethod.GET) 
 	public String listCustomer (Model model) {
 		model.addAttribute("titulo", "Lista de clientes");
-		model.addAttribute("customer",CustomerService.findALL());
+		model.addAttribute("customer",customerService.findALL());
 		return "list-customer";
 		
 		
@@ -50,7 +52,7 @@ public class CustomerController {
 		 Customer customer = null;
 		 
 		 if(id>0) {
-			 customer= CustomerService.findOne(id);
+			 customer= customerService.findOne(id);
 		 }else {
 			 
 			 return "redirect:/list-customer";
@@ -63,18 +65,26 @@ public class CustomerController {
 	 }
 	 
 	 @RequestMapping(value="form-customer", method=RequestMethod.POST)
-	 public String save(@Valid Customer customer, BindingResult result, Model model) {
+	 public String save(@Valid Customer customer, BindingResult result, Model model, SessionStatus status) {
 		
-	
-		 
 		 if(result.hasErrors()) {
 			 model.addAttribute("titulo", "Formulario de Cliente");
 			return "form-customer";
 		 }
 		 
-		 CustomerService.save(customer);
-
+		 customerService.save(customer);
+         status.setComplete();
 		 
 		return "redirect:list-customer";
 	 }
+	 
+	 @RequestMapping(value="/delete/{id}")
+	 public String delete(@PathVariable(value="id") Long id) {
+		 
+		 if(id > 0) {
+			 customerService.delete(id);
+		 }
+		return "redirect:/list-customer";
+	 }
+	 
 }

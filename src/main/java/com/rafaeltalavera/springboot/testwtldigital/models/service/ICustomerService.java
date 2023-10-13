@@ -13,6 +13,6 @@ public interface ICustomerService {
 	  
 	  public Customer findOne(Long id);
 	  
-	  public void delte(Long id);
+	  public void delete(Long id);
 	    
 }

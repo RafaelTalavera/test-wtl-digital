@@ -24,8 +24,7 @@ public class CustomerServiceImplement implements ICustomerService{
 	
 	@Override
 	@Transactional
-	public void save(Customer customer) {
-	
+	public void save(Customer customer) {	
 		customerDao.save(customer);
 	}
 
@@ -37,7 +36,7 @@ public class CustomerServiceImplement implements ICustomerService{
 	
 	@Override
 	@Transactional
-	public void delte(Long id) {
+	public void delete(Long id) {
 		customerDao.deleteById(id);
 		
 	}
