@@ -1,93 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-	<meta charset="UTF-8">
-	<title th:text="${titulo}"></title>
-
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-</head>
+<head th:replace="layout/layout :: head"></head>
 
 <body>
 
-	<nav class="navbar navbar-expand-lg bg-body-tertiary">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Navbar</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Features</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Pricing</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link disabled" aria-disabled="true">Disabled</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<header th:replace="layout/layout :: header"></header>
 
-	<div class="container">
-		<h1 class="text-secondary border border-success border-top-0 border-left-0 border-right-0" th:text="${titulo}">
-		</h1>
-		<a th:href="@{/form-customer}" class="btn btn-success">Criar Cliente</a>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>id</th>
-					<th>CPF</th>
-					<th>Nome completo</th>
-					<th>Endereço</th>
-					<th>Data de início</th>
-					<th>Email</th>
-					<th>telefone</th>
-					<th>Editar</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="customers: ${customer}">
-					<td th:text="${customers.id}"></td>
-					<td th:text="${customers.cpf}"></td>
-					<td th:text="${customers.fullName}"></td>
-					<td th:text="${customers.address}"></td>
-					<td th:text="${customers.creatAt}"></td>
-					<td th:text="${customers.email}"></td>
-					<td th:text="${customers.phone}"></td>
-					<td><a class="btn btn-primary btn-xs" th:href="@{/form-customer/} + ${customers.id}" th:text="'editar'"></a>
+	<div class="container py-4">
 
-					</td>
-
-
-
-				</tr>
-			</tbody>
-		</table>
-
+			<h4 class="text-secondary" th:text="${titulo}">
+			</h4>
+			<a th:href="@{/form-customer}" class="btn btn-success">Criar Cliente</a>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>CPF</th>
+						<th>Nome completo</th>
+						<th>Endereço</th>
+						<th>Data de início</th>
+						<th>Email</th>
+						<th>telefone</th>
+						<th>Editar</th>
+						<th>Eliminar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="customer : ${customer}">
+						<td th:text="${customer.id}"></td>
+						<td th:text="${customer.cpf}"></td>
+						<td th:text="${customer.fullName}"></td>
+						<td th:text="${customer.address}"></td>
+						<td th:text="${customer.creatAt}"></td>
+						<td th:text="${customer.email}"></td>
+						<td th:text="${customer.phone}"></td>
+						<td><a class="btn btn-primary btn-xs" th:href="@{'/form-customer/' + ${customer.id}}"
+								th:text="Editar"></a></td>
+						<td><a class="btn btn-danger btn-xs" th:href="@{'/delete/' + ${customer.id}}" th:text="delete"
+								onclick="return confirm('Estás seguro que quieres eliminar?');"></a></td>
+					</tr>
+				</tbody>
+			</table>
+	
 	</div>
 
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-		crossorigin="anonymous"></script>
-
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-		crossorigin="anonymous"></script>
+	<footer th:replace="layout/layout :: footer"></footer>
 
 </body>
-
 
 </html>
