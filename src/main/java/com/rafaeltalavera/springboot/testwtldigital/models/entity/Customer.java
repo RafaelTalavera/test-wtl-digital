@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,7 +43,9 @@ public class Customer implements Serializable {
 	private String address;
 
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	@Column(name = "create_at")
+	@DateTimeFormat(pattern = "dd-mm-yyyy")
 	private Date creatAt;
 
 	@Email
