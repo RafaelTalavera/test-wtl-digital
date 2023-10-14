@@ -56,11 +56,11 @@ public class Customer implements Serializable {
 	private String phone;
 
 	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<SalesOrder> SalesOrders;
+	private List<SalesOrder> salesOrders;
 
 	// ArrayList initialization
 	public Customer() {
-		SalesOrders = new ArrayList<SalesOrder>();
+		salesOrders = new ArrayList<SalesOrder>();
 	}
 
 	public Long getId() {
@@ -120,11 +120,11 @@ public class Customer implements Serializable {
 	}
 
 	public List<SalesOrder> getSalesOrders() {
-		return SalesOrders;
+		return salesOrders;
 	}
 
 	public void setSalesOrders(List<SalesOrder> salesOrders) {
-		SalesOrders = salesOrders;
+		this.salesOrders = salesOrders;
 	}
 
 	private static final long serialVersionUID = 1L;

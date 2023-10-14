@@ -24,6 +24,9 @@ public class Product implements Serializable {
 	private Long isbn;
 
 	@NotEmpty
+	private String description;
+
+	@NotEmpty
 	private String brand;
 
 	@NotNull
@@ -70,6 +73,14 @@ public class Product implements Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	private static final long serialVersionUID = 1L;

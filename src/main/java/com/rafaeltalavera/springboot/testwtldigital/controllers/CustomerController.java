@@ -57,7 +57,7 @@ public class CustomerController {
 		
 		Page<Customer> customer = customerService.findALL(pageRequest);
 
-		PageRender<Customer> pageRender = new PageRender<>("/listar",customer);
+		PageRender<Customer> pageRender = new PageRender<>("/list-customer",customer);
 		model.addAttribute("titulo", "Lista de clientes");
 		model.addAttribute("customer", customer);
 		model.addAttribute("page",pageRender);
