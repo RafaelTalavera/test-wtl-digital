@@ -16,6 +16,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
+					<th></th>
 					<th>id</th>
 					<th>CPF</th>
 					<th>Nome completo</th>
@@ -23,12 +24,14 @@
 					<th>Data de início</th>
 					<th>Email</th>
 					<th>telefone</th>
-					<th>Editar</th>
-					<th>Eliminar</th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="customer : ${customer}">
+					
+					<td><a class="btn btn-primary btn-xs" th:href="@{/show-customer/} + ${customer.id}">detalhes</a></td>
 					<td th:text="${customer.id}"></td>
 					<td th:text="${customer.cpf}"></td>
 					<td th:text="${customer.fullName}"></td>

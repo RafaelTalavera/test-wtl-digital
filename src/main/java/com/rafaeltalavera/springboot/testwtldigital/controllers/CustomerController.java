@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +31,24 @@ public class CustomerController {
 
 	@Autowired
 	private ICustomerService customerService;
+	
+	
+	@GetMapping(value="/show-customer/{id}")
+	public String show(@PathVariable(value="id")Long id, Map<String, Object> model, RedirectAttributes flash) {
+		
+		Customer customer = customerService.findOne(id);
+		
+		if(customer==null) {
+			flash.addAttribute("error", "O cliente não foi encontrado no banco de dados");
+			return "redirect:/list-customer";
+		}
+		
+		model.put("customer", customer);
+		model.put("titulo", "Detalhe do cliente: " + customer.getFullName());
+		
+		return "show-customer";
+		
+	}
 
 	@RequestMapping(value = "/list-customer", method = RequestMethod.GET)
 	public String listCustomer(@RequestParam(name="page", defaultValue="0") int page,Model model) {
