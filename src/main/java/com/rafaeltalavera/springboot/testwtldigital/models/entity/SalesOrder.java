@@ -30,7 +30,7 @@ public class SalesOrder implements Serializable {
 	private String description;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_alta")
+	@Column(name = "create_at")
 	private Date createAt;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "salesOrder")
@@ -103,6 +103,8 @@ public class SalesOrder implements Serializable {
 		return total;
 
 	}
+	
+	
 
 	private static final long serialVersionUID = 1L;
 }
