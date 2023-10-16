@@ -10,10 +10,14 @@
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
+
+				<h4 class="card-title">
+					<a class="btn btn-primary" th:href="@{'/show-customer/' + ${sales.customer.id}}"
+						th:text="'&laquo; volver'"></a>
+				</h4>
 				<h4 class="card-title"></h4>
 
 				<form th:action="@{/sales/form}" th:object="${sales}" method="post">
-
 
 					<div class="form-group row">
 						<label for="cliente" class="col-sm-2 col-form-label" th:text="'Cliente'"></label>
@@ -22,6 +26,7 @@
 						</div>
 					</div>
 
+
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label" th:text="'Descrição'"></label>
 						<div class="col-sm-6">
@@ -29,11 +34,42 @@
 						</div>
 					</div>
 
+
 					<div class="form-group row">
-						<div class="col-sm-2"></div>
+						<label for="pesquisar produto" class="col-sm-2 col-form-label"
+							th:text="'pesquisar produto'"></label>
 						<div class="col-sm-6">
-							<input type="submit" th:value="${titulo}" class="btn btn-secondary" />
+							<input type="text" name="search_product" id="search_product" class="form-control" />
 						</div>
+					</div>
+					
+					<table th:replace="sales/template-items :: itemsSale"></table>
+
+
+
+					<table id="loadItemProducts"
+						class="table table-sm table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Descrição</th>
+								<th>Marca</th>
+								<th>Quantia</th>
+								<th>Total</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<h5>Total <span class="badge badge-secondary" id="gran_total">0</span></h5>
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" th:value="${titulo}"
+								class="btn btn-secondary" />
+						</div>
+					</div>
+
 					</div>
 				</form>
 			</div>
@@ -41,6 +77,6 @@
 	</div>
 
 	<footer th:replace="layout/layout :: footer"></footer>
-</body>
+	<script th:replace="sales/js/autocomplete-products :: javascript"></script>
 
-</html>
+</body>

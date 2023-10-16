@@ -26,7 +26,7 @@ import com.rafaeltalavera.springboot.testwtldigital.util.paginator.PageRender;
 import jakarta.validation.Valid;
 
 @Controller
-@SessionAttributes("cliente")
+@SessionAttributes("customer")
 public class CustomerController {
 
 	@Autowired
@@ -36,7 +36,7 @@ public class CustomerController {
 	@GetMapping(value="/show-customer/{id}")
 	public String show(@PathVariable(value="id")Long id, Map<String, Object> model, RedirectAttributes flash) {
 		
-		Customer customer = customerService.findOne(id);
+		Customer customer = customerService.findCustomerById(id);
 		
 		if(customer==null) {
 			flash.addAttribute("error", "O cliente não foi encontrado no banco de dados");
@@ -82,7 +82,7 @@ public class CustomerController {
 		Customer customer = null;
 
 		if (id > 0) {
-			customer = customerService.findOne(id);
+			customer = customerService.findCustomerById(id);
 			if (customer == null) {
 				flash.addFlashAttribute("erro", "O ID do cliente não existe no BBDD!");
 				return "redirect:/list-customer";

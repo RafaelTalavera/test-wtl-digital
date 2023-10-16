@@ -8,6 +8,13 @@
 
 
 	<div class="container py-4">
+
+
+		<h4><a class="btn btn-success btn-sm" th:href="@{'/sales/form/' + ${customer.id}}"
+				th:text="'orden de compra'"></a></h4>
+
+				
+
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
@@ -56,25 +63,27 @@
 						</div>
 					</div>
 
-<div th:if="${#lists.isEmpty(customer.salesOrders)}" class="alert alert-info my-4" th:text="'Não há pedidos de compra para exibição do cliente:  ' + ${customer.fullName}"></div>
-<table th:if="${not #lists.isEmpty(customer.salesOrders)}" class="table table-bordered table-striped my-4">
-	<thead>
-		<tr>
-			<th>id</th>
-			<th>descrição</th>
-			<th>data</th>
-			<th>total</th>			
-		</tr>
-	</thead>
-	<tbody>
-		<tr th:each="salesOrder: ${customer.salesOrders}">
-			<td th:text="${salesOrder.id}"></td>
-			<td th:text="${salesOrder.description}"></td>
-			<td th:text="${salesOrder.createAt}"></td>
-			<td th:text="${salesOrder.total}"></td>	
-		</tr>
-	</tbody>
-</table>
+					<div th:if="${#lists.isEmpty(customer.salesOrders)}" class="alert alert-info my-4"
+						th:text="'Não há pedidos de compra para exibição do cliente:  ' + ${customer.fullName}"></div>
+					<table th:if="${not #lists.isEmpty(customer.salesOrders)}"
+						class="table table-bordered table-striped my-4">
+						<thead>
+							<tr>
+								<th>id</th>
+								<th>descrição</th>
+								<th>data</th>
+								<th>total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="salesOrder: ${customer.salesOrders}">
+								<td th:text="${salesOrder.id}"></td>
+								<td th:text="${salesOrder.description}"></td>
+								<td th:text="${salesOrder.createAt}"></td>
+								<td th:text="${salesOrder.total}"></td>
+							</tr>
+						</tbody>
+					</table>
 
 
 

@@ -94,6 +94,7 @@ public class Customer implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 
 	public Date getCreatAt() {
 		return creatAt;
