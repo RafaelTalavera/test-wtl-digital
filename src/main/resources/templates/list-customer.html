@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="layout/layout :: head"></head>
 
@@ -12,11 +12,13 @@
 
 		<h4 class="text-secondary" th:text="${titulo}">
 		</h4>
-		<a th:href="@{/form-customer}" class="btn btn-success">Criar Cliente</a>
+		<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form-customer}" 
+		class="btn btn-success">Criar Cliente</a>
+		
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>ver</th>
+					<th sec:authorize="hasRole('ROLE_USER')">ver</th>
 					<th>id</th>
 					<th>CPF</th>
 					<th>Nome completo</th>
@@ -24,15 +26,17 @@
 					<th>Data</th>
 					<th>Email</th>
 					<th>telefone</th>
-					<th>criar</th>
-					<th>editar</th>
-					<th>eliminar</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">criar</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">editar</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="customer : ${customer}">
 
-					<td><a class="btn btn-primary btn-xs" th:href="@{/show-customer/} + ${customer.id}">detalhes</a>
+					<td sec:authorize="hasRole('ROLE_USER')">
+						<a class="btn btn-primary btn-xs" 
+						th:href="@{/show-customer/} + ${customer.id}">detalhes</a>
 					</td>
 					<td th:text="${customer.id}"></td>
 					<td th:text="${customer.cpf}"></td>
@@ -41,11 +45,11 @@
 					<td th:text="${customer.creatAt}"></td>
 					<td th:text="${customer.email}"></td>
 					<td th:text="${customer.phone}"></td>
-					<td><a class="btn btn-success btn-sm" th:href="@{'/sales/form/' + ${customer.id}}"
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-success btn-sm" th:href="@{'/sales/form/' + ${customer.id}}"
 							th:text="'compra'"></a></td>
-					<td><a class="btn btn-primary btn-xs" th:href="@{'/form-customer/' + ${customer.id}}"
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs" th:href="@{'/form-customer/' + ${customer.id}}"
 							th:text="Editar"></a></td>
-					<td><a class="btn btn-danger btn-xs" th:href="@{'/delete/' + ${customer.id}}" th:text="delete"
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs" th:href="@{'/delete/' + ${customer.id}}" th:text="delete"
 							onclick="return confirm('Estás seguro que quieres eliminar?');"></a></td>
 				</tr>
 			</tbody>

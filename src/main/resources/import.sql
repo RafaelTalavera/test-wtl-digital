@@ -48,5 +48,14 @@ INSERT INTO products (isbn, description, brand, stock, price) VALUES (9780316119
 INSERT INTO products (isbn, description, brand, stock, price) VALUES (9780451530967, 'Refrigerator Whirlpool WRB322DMBM', 'Whirlpool', 6, 999.99);
 
 
+/* Creamos algunos usuarios con sus roles */
+INSERT INTO `usuarios` (username, password, enabled) VALUES ('rafael','$2a$10$O9wxmH/AeyZZzIS09Wp8YOEMvFnbRVJ8B4dmAMVSGloR62lj.yqXG',1);
+INSERT INTO `usuarios` (username, password, enabled) VALUES ('admin','$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS',1);
+
+INSERT INTO `authorities` (usuario_id, authority) VALUES (1,'ROLE_USER');
+INSERT INTO `authorities` (usuario_id, authority) VALUES (2,'ROLE_ADMIN');
+INSERT INTO `authorities` (usuario_id, authority) VALUES (2,'ROLE_USER');
+
+
 
 

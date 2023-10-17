@@ -1,11 +1,19 @@
 package com.rafaeltalavera.springboot.testwtldigital.controllers;
 
+import java.util.Collection;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,7 +40,7 @@ public class CustomerController {
 	@Autowired
 	private ICustomerService customerService;
 	
-	
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping(value="/show-customer/{id}")
 	public String show(@PathVariable(value="id")Long id, Map<String, Object> model, RedirectAttributes flash) {
 		
@@ -50,7 +58,7 @@ public class CustomerController {
 		
 	}
 
-	@RequestMapping(value = "/list-customer", method = RequestMethod.GET)
+	@RequestMapping(value = {"/list-customer", "/"}, method = RequestMethod.GET)
 	public String listCustomer(@RequestParam(name="page", defaultValue="0") int page,Model model) {
 		
 		Pageable pageRequest = PageRequest.of(page, 4);
@@ -65,6 +73,7 @@ public class CustomerController {
 
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/form-customer")
 	public String create(Map<String, Object> model) {
 
@@ -76,6 +85,7 @@ public class CustomerController {
 
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/form-customer/{id}")
 	public String edit(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 
@@ -98,6 +108,7 @@ public class CustomerController {
 
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "form-customer", method = RequestMethod.POST)
 	public String save(@Valid Customer customer, BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status) {
@@ -113,6 +124,7 @@ public class CustomerController {
 		return "redirect:list-customer";
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
 
@@ -123,7 +135,26 @@ public class CustomerController {
 		return "redirect:/list-customer";
 	}
 
- 	 
+	private boolean hasRole(String role) {
+		
+		SecurityContext context = SecurityContextHolder.getContext();
+		
+		if(context == null) {
+			return false;
+		}
+		
+		Authentication auth = context.getAuthentication();
+		
+		if(auth == null) {
+			return false;
+		}
+		
+		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+		
+		return authorities.contains(new SimpleGrantedAuthority(role));
+		
+
+	}
  
 
 }

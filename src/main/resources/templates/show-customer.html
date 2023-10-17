@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="layout/layout :: head"></head>
 
@@ -10,7 +11,8 @@
 	<div class="container py-4">
 
 
-		<h4><a class="btn btn-success btn-sm" th:href="@{'/sales/form/' + ${customer.id}}"
+		<h4><a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success btn-sm" 
+		        th:href="@{'/sales/form/' + ${customer.id}}"
 				th:text="'orden de compra'"></a></h4>
 
 
@@ -73,7 +75,8 @@
 								<th>descrição</th>
 								<th>data</th>
 								<th>total</th>
-								<th>ver</th>
+								<th sec:authorize="hasRole('ROLE_ADMIN')">ver</th>
+								<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -82,9 +85,14 @@
 								<td th:text="${salesOrder.description}"></td>
 								<td th:text="${salesOrder.createAt}"></td>
 								<td th:text="${salesOrder.total}"></td>
-								<td>
+								<td sec:authorize="hasRole('ROLE_ADMIN')">
 									<a class="btn btn-primary btn-xs"
 										th:href="@{'/sales/show/' + ${salesOrder.customer.id}}" th:text="'detalhe'"></a>
+								</td>
+								<td sec:authorize="hasRole('ROLE_ADMIN')">
+									<a class="btn btn-danger btn-xs"
+										th:href="@{'/sales/delete/' + ${salesOrder.customer.id}}" th:text="'eliminar'"
+										onclick="return confirm('Tem certeza de que deseja excluir o pedido de compra?');"></a>
 								</td>
 							</tr>
 						</tbody>
