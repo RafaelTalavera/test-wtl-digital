@@ -36,7 +36,7 @@ public class CustomerController {
 	@GetMapping(value="/show-customer/{id}")
 	public String show(@PathVariable(value="id")Long id, Map<String, Object> model, RedirectAttributes flash) {
 		
-		Customer customer = customerService.findCustomerById(id);
+		Customer customer = customerService.findOne(id);
 		
 		if(customer==null) {
 			flash.addAttribute("error", "O cliente não foi encontrado no banco de dados");
@@ -82,7 +82,7 @@ public class CustomerController {
 		Customer customer = null;
 
 		if (id > 0) {
-			customer = customerService.findCustomerById(id);
+			customer = customerService.findOne(id);
 			if (customer == null) {
 				flash.addFlashAttribute("erro", "O ID do cliente não existe no BBDD!");
 				return "redirect:/list-customer";
@@ -127,3 +127,4 @@ public class CustomerController {
  
 
 }
+
