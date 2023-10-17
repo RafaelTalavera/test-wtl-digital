@@ -1,0 +1,79 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+
+	<div class="container py-4">
+
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+
+				<h4 class="card-title">
+					<a th:href="@{'/sales/show/' + ${salesOrder.customer.id}}" class="btn btn-light btn-xs">&laquo;
+						volver</a>
+
+				</h4>
+
+				<ul class="list-group my-2">
+					<li class="list-group-item list-group-item-primary" th:text="'Dados do cliente'"></li>
+					<li class="list-group-item" th:text="${salesOrder.customer.fullName}"></li>
+					<li class="list-group-item" th:text="${salesOrder.customer.email}"></li>
+				</ul>
+
+				<ul class="list-group my-2">
+					<li class="list-group-item list-group-item-success" th:text="'Dados do pedido de compra'"></li>
+					<li class="list-group-item" th:text="'Folio: ' + ${salesOrder.id}"></li>
+					<li class="list-group-item" th:text="'Descrição: ' + ${salesOrder.description}"></li>
+					<li class="list-group-item" th:text="'Data: ' + ${salesOrder.createAt}"></li>
+				</ul>
+				<div class="alert alert-info my-4" th:if="${#lists.isEmpty(salesOrder.items)}"
+					th:text="'Não há linhas para o pedido de compra' + ${salesOrder.description}"></div>
+
+				<table th:if="${not #lists.isEmpty(salesOrder.items)}"
+					class="table table-striped table-hover table-bordered my-3">
+					<thead>
+						<tr>
+							<th>isbn</th>
+							<th>description</th>
+							<th>marca</th>
+							<th>stock</th>
+							<th>price</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="linea: ${salesOrder.items}">
+							<td th:text="${linea.product.isbn}"></td>
+							<td th:text="${linea.product.description}"></td>
+							<td th:text="${linea.product.brand}"></td>
+							<td th:text="${linea.product.price}"></td>
+							<td th:text="${linea.quantity}"></td>
+							<td th:text="${linea.calculateAmount()}"></td>
+						</tr>
+					</tbody>
+
+				</table>
+
+				<h5 class="float-right">
+					Gran Total <span th:text="${salesOrder.total}" class="badge badge-secondary"></span>
+				</h5>
+
+
+				<a th:href="@{'/show-customer/' + ${salesOrder.customer.id}}" class="btn btn-light btn-xs">&laquo; volver</a>
+
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

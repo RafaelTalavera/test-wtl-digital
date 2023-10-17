@@ -5,4 +5,5 @@ NotEmpty.customer.address = A direção do campo não pode estar vazia
 NotNull.customer.creatAt = O campo fecha não pode ser vazio
 typeMismatch.customer.creatAt = A data deve levar este formato "dd-mm-yyyy"
 
+NotEmpty.salesOrder.description = O campo não pode ficar vazio
 

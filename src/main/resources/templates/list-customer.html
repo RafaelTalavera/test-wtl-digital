@@ -16,22 +16,24 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th></th>
+					<th>ver</th>
 					<th>id</th>
 					<th>CPF</th>
 					<th>Nome completo</th>
 					<th>Endereço</th>
-					<th>Data de início</th>
+					<th>Data</th>
 					<th>Email</th>
 					<th>telefone</th>
-					<th></th>
-					<th></th>
+					<th>criar</th>
+					<th>editar</th>
+					<th>eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="customer : ${customer}">
-					
-					<td><a class="btn btn-primary btn-xs" th:href="@{/show-customer/} + ${customer.id}">detalhes</a></td>
+
+					<td><a class="btn btn-primary btn-xs" th:href="@{/show-customer/} + ${customer.id}">detalhes</a>
+					</td>
 					<td th:text="${customer.id}"></td>
 					<td th:text="${customer.cpf}"></td>
 					<td th:text="${customer.fullName}"></td>
@@ -39,6 +41,8 @@
 					<td th:text="${customer.creatAt}"></td>
 					<td th:text="${customer.email}"></td>
 					<td th:text="${customer.phone}"></td>
+					<td><a class="btn btn-success btn-sm" th:href="@{'/sales/form/' + ${customer.id}}"
+							th:text="'compra'"></a></td>
 					<td><a class="btn btn-primary btn-xs" th:href="@{'/form-customer/' + ${customer.id}}"
 							th:text="Editar"></a></td>
 					<td><a class="btn btn-danger btn-xs" th:href="@{'/delete/' + ${customer.id}}" th:text="delete"
