@@ -26,7 +26,7 @@ import com.rafaeltalavera.springboot.testwtldigital.util.paginator.PageRender;
 import jakarta.validation.Valid;
 
 @Controller
-@SessionAttributes("cliente")
+@SessionAttributes("customer")
 public class CustomerController {
 
 	@Autowired
@@ -70,7 +70,7 @@ public class CustomerController {
 
 		Customer customer = new Customer();
 		model.put("customer", customer);
-		model.put("titulo", "Formulario de Cliente");
+		model.put("titulo", "Formulário de cliente");
 
 		return "form-customer";
 
@@ -103,7 +103,7 @@ public class CustomerController {
 			SessionStatus status) {
 
 		if (result.hasErrors()) {
-			model.addAttribute("titulo", "Formulario de Cliente");
+			model.addAttribute("titulo", "Formulário de cliente");
 			return "form-customer";
 		}
 		String mensajeFlash = (customer.getId() != null) ? "Cliente editado com sucesso!" : "Cliente editado com sucesso!";

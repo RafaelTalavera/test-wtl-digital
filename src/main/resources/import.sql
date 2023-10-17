@@ -1,4 +1,3 @@
-
 -- Insertar datos en la tabla 'customers'
 INSERT INTO customers (cpf, full_name, address, create_at, email, phone) VALUES (29, 'Neils Udell', 'Del Sol', '2023-06-03', 'nudell0@jigsy.com', '(397) 4545421');
 INSERT INTO customers (cpf, full_name, address, create_at, email, phone) VALUES (60, 'Kimmie Avrahamof', 'Eastlawn', '2022-11-14', 'kavrahamof1@sphinn.com', '(444) 1563570');
@@ -49,56 +48,8 @@ INSERT INTO products (isbn, description, brand, stock, price) VALUES (9780451530
 
 
 
--- Insertar una orden de venta en sales_orders
-INSERT INTO sales_orders (description, customer_id, create_at) VALUES ('Orden Sales prueba 1', 1, NOW());
-
--- Insertar registros en items_sales que hacen referencia a la orden de venta creada
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (1, 1, 1);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (2, 1, 4);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (1, 1, 5);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (1, 1, 7);
-
--- Insertar una orden de venta en sales_orders
-INSERT INTO sales_orders (description, customer_id, create_at) VALUES ('Orden de prueba 2', 2, NOW());
-
--- Insertar registros en items_sales que hacen referencia a la orden de venta creada
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (3, 2, 3);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (2, 2, 6);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (1, 2, 8);
-
--- Insertar una orden de venta en sales_orders
-INSERT INTO sales_orders (description, customer_id, create_at) VALUES ('Venta especial', 3, NOW());
-
--- Insertar registros en items_sales que hacen referencia a la orden de venta creada
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (5, 3, 2);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (4, 3, 4);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (2, 3, 7);
-
--- Insertar una orden de venta en sales_orders
-INSERT INTO sales_orders (description, customer_id, create_at) VALUES ('Venta express', 1, NOW());
-
--- Insertar registros en items_sales que hacen referencia a la orden de venta creada
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (2, 4, 1);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (1, 4, 5);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (3, 4, 6);
-
--- Insertar una orden de venta en sales_orders
-INSERT INTO sales_orders (description, customer_id, create_at) VALUES ('Venta anual', 5, NOW());
-
--- Insertar registros en items_sales que hacen referencia a la orden de venta creada
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (4, 5, 3);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (2, 5, 4);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (6, 5, 7);
-
--- Insertar una orden de venta en sales_orders
-INSERT INTO sales_orders (description, customer_id, create_at) VALUES ('Venta de verano', 2, NOW());
-
--- Insertar registros en items_sales que hacen referencia a la orden de venta creada
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (2, 6, 2);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (3, 6, 3);
-INSERT INTO items_sales (quantity, sales_order_id, product_id) VALUES (1, 6, 5);
-
 
 
 
  
+

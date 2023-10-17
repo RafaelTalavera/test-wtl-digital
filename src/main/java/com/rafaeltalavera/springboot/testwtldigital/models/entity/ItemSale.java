@@ -21,14 +21,14 @@ public class ItemSale implements Serializable {
 	private Long id;
 
 	@NotNull
-	private Double quantity;
+	private Integer quantity;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	private Product product;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "salesOrder_id")
+	@JoinColumn(name = "sales_order_id")
 	private SalesOrder salesOrder;
 
 	public Double calculateAmount() {
@@ -44,11 +44,11 @@ public class ItemSale implements Serializable {
 		this.id = id;
 	}
 
-	public Double getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Double quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 

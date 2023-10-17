@@ -24,7 +24,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "Customers")
+@Table(name = "customers")
 public class Customer implements Serializable {
 
 	@Id
@@ -94,6 +94,7 @@ public class Customer implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 
 	public Date getCreatAt() {
 		return creatAt;
